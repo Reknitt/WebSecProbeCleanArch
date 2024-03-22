@@ -27,11 +27,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.Map("/", () => "Index Page");
-app.Map("/create", () =>
-{
-
-});
 
 app.UseHttpsRedirection();
 
