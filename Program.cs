@@ -1,5 +1,7 @@
+using MediatR;
 using Presentation.Domain.Interfaces;
 using WebSecProbeCleanArch.Application.Commands.UserCommands.Create;
+using WebSecProbeCleanArch.Infrastructure.Controllers.VulnerabilityController;
 using WebSecProbeCleanArch.Infrastructure.DbContexts;
 using WebSecProbeCleanArch.Infrastructure.Repositories.UserRepository;
 using WebSecProbeCleanArch.Infrastructure.Repositories.VulnerabilityRepository;
@@ -17,6 +19,7 @@ builder.Services.AddDbContextFactory<SqliteDbContext>();
 builder.Services.AddScoped<IUserRepository, EfUserRepository>();
 builder.Services.AddScoped<IVulnerabilityRepository, EfVulnerabilityRepository>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
 
 var app = builder.Build();
 

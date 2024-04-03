@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Queries\VulnerabilityQueries\" />
+    <Folder Include="Infrastructure\Controllers\UserControllers\" />
     <Folder Include="Infrastructure\Models\" />
   </ItemGroup>
 
