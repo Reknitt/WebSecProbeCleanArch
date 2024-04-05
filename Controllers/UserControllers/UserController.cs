@@ -4,7 +4,7 @@ using Presentation.Domain.Entities.UserEntities;
 using WebSecProbeCleanArch.Application.Commands.UserCommands.Create;
 using WebSecProbeCleanArch.Application.Queries.UserQueries;
 
-namespace WebSecProbeCleanArch.Controllers
+namespace WebSecProbeCleanArch.Controllers.UserControllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -13,7 +13,7 @@ namespace WebSecProbeCleanArch.Controllers
 
         private readonly IMediator _mediator;
 
-        public UserController(IMediator mediator) 
+        public UserController(IMediator mediator)
         {
             _mediator = mediator;
         }

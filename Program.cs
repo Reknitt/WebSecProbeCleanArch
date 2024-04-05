@@ -1,7 +1,7 @@
 using MediatR;
 using Presentation.Domain.Interfaces;
 using WebSecProbeCleanArch.Application.Commands.UserCommands.Create;
-using WebSecProbeCleanArch.Infrastructure.Controllers.VulnerabilityController;
+using WebSecProbeCleanArch.Controllers.VulnerabilityControllers;
 using WebSecProbeCleanArch.Infrastructure.DbContexts;
 using WebSecProbeCleanArch.Infrastructure.Repositories.UserRepository;
 using WebSecProbeCleanArch.Infrastructure.Repositories.VulnerabilityRepository;
@@ -19,6 +19,11 @@ builder.Services.AddDbContextFactory<SqliteDbContext>();
 builder.Services.AddScoped<IUserRepository, EfUserRepository>();
 builder.Services.AddScoped<IVulnerabilityRepository, EfVulnerabilityRepository>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("http://localhost:3000"));
+});
 
 
 var app = builder.Build();
@@ -28,6 +33,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors();
 }
 
 
