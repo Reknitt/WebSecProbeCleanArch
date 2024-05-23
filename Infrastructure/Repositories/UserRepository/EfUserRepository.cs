@@ -44,6 +44,15 @@ namespace WebSecProbeCleanArch.Infrastructure.Repositories.UserRepository
             }
         }
 
+        public async Task<User?> GetByLoginAndPasswordAsync(string login, string password)
+        {
+            using (var context = _dbContextFactory.CreateDbContext())
+            {
+                var user = await context.Users.SingleOrDefaultAsync(u => u.Login == login && u.Password == password);
+                return user;
+            }
+        }
+
         public Task<User> GetByNameAsync(string name)
         {
             throw new NotImplementedException();

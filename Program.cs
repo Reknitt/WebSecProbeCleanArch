@@ -1,5 +1,9 @@
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Presentation.Domain.Interfaces;
+using System.Text;
+using WebSecProbeCleanArch;
 using WebSecProbeCleanArch.Application.Commands.UserCommands.Create;
 using WebSecProbeCleanArch.Controllers.VulnerabilityControllers;
 using WebSecProbeCleanArch.Infrastructure.DbContexts;
@@ -29,6 +33,25 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = Config.Issuer,
+        ValidAudience = Config.Audience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.Key))
+    };
+});
+
+
 
 var app = builder.Build();
 
@@ -42,6 +65,8 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

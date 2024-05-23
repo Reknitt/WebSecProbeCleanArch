@@ -10,5 +10,6 @@ namespace Presentation.Domain.Interfaces
         Task<User> GetByIdAsync(int id);
         Task<User> GetByNameAsync(string name);
         Task<User> GetByEmailAsync(string email);
+        Task<User?> GetByLoginAndPasswordAsync(string name, string password);
     }
 }
